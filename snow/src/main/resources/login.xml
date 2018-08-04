@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Message>
+    <Request>GetUserAllInfo</Request>
+    <Ccid>2</Ccid>
+    <Time>2013-4-11-T11:28:54Z</Time>
+    <Action_ext>show</Action_ext>
+    <UserID>1</UserID>
+</Message>

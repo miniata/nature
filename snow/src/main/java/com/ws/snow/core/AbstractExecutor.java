@@ -19,28 +19,28 @@ public abstract class AbstractExecutor implements Executor {
         T request();
     }
 
-    public static class GetRequest implements HttpRequest<Map<String, Object>>{
+    private static class GetRequest implements HttpRequest<Map<String, Object>>{
         @Override
         public Map<String, Object> request() {
             return null;
         }
     }
 
-    public static class PostRequest implements HttpRequest<Map<String, Object>>{
+    private static class PostRequest implements HttpRequest<Map<String, Object>>{
         @Override
         public Map<String, Object> request() {
             return null;
         }
     }
 
-    public static class PutRequest implements HttpRequest<Map<String, Object>>{
+    private static class PutRequest implements HttpRequest<Map<String, Object>>{
         @Override
         public Map<String, Object> request() {
             return null;
         }
     }
 
-    public static class DeleteRequest implements HttpRequest<Map<String, Object>>{
+    private static class DeleteRequest implements HttpRequest<Map<String, Object>>{
         @Override
         public Map<String, Object> request() {
             return null;
