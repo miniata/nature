@@ -1,6 +1,6 @@
 package com.ws.nature;
 
-import com.ws.nature.core.StandardStateFlow;
+import com.ws.nature.core.Context;
 
 import java.util.Map;
 
@@ -17,6 +17,6 @@ public interface Handle {
      * @param context
      * @return
      */
-    Map<String, Object> handle(StandardStateFlow context);
+    Map<String, Object> handle(Context context);
 
 }
