@@ -18,7 +18,7 @@ public class FlowEngine<T extends Enum> {
 
     private static final List<Context> states = new ArrayList<>();
 
-    public FlowEngine() {
+    FlowEngine() {
         init();
     }
 

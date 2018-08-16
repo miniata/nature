@@ -1,10 +1,8 @@
 package com.ws.nature;
 
-import com.ws.nature.core.CommonConfig;
+import com.ws.nature.core.CommonFactory;
 import com.ws.nature.core.Context;
 import com.ws.nature.core.FlowEngine;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Map;
 
@@ -34,6 +32,8 @@ public class Test extends BaseJunit4Test{
         //5.测试混入其他枚举类型
         //FlowEngine<State> flowEngine1 = CommonFactory.newFlowEngine(State.class);
         //flowEngine1.getContext(OrderState, OrderState);
+        //6.测试跳过工厂方法创建流程引擎,看是否可以成功
+        //FlowEngine flowEngine1 = new FlowEngine<>();
     }
 
 }
