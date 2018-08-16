@@ -89,6 +89,6 @@ public class Context {
     }
 
     public Map<String, Object> toHandle(){
-        return this.getHandle().handle(this);
+        return getHandle().handle(this);
     }
 }

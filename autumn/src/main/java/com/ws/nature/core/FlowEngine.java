@@ -29,6 +29,9 @@ public class FlowEngine<T extends Enum> {
      * @return
      */
     public Context getContext(T present, T expect){
+        if(present == null || expect == null){
+            throw new RuntimeException("参数 present："+present+"、expect："+expect+",一个都不能为空");
+        }
         List<Context> contexts = states.stream()
                 .filter(o -> o.getPresent().equals(present.name()) && o.getExpect().equals(expect.name()))
                 .collect(Collectors.toList());
