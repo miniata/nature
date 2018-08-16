@@ -5,14 +5,14 @@ import com.ws.nature.Handle;
 import java.util.Map;
 
 /**
- * Context
+ * DefaultFlow为Handle操作类的默认装饰类
  *
  * @author wanshou
  * @date 2018/8/15
  */
-public class DefaultStateFlow extends BaseFlow {
+public class DefaultFlow extends BaseFlow {
 
-    public DefaultStateFlow(Handle handle) {
+    public DefaultFlow(Handle handle) {
         super(handle);
     }
 

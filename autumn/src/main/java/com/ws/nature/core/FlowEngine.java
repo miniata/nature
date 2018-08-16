@@ -45,7 +45,7 @@ public class FlowEngine<T extends Enum> {
         List<Context> contexts = JSONArray.parseArray(CommonConfig.flows, Context.class);
         contexts.forEach(context -> {
             Handle handle = SpringHelper.getBeanByName(context.getHandleName(), Handle.class);
-            Handle dsf = new DefaultStateFlow(handle);
+            Handle dsf = new DefaultFlow(handle);
             context.setHandle(dsf);
         });
         states.addAll(contexts);
