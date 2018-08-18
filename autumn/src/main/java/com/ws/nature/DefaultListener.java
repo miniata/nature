@@ -15,8 +15,8 @@ public class DefaultListener implements HandleListener{
 
     @Override
     public void update(Context context) {
-        System.out.println("状态变更由："+context.getHandleName()+" 来完成");
-        System.out.println("状态从当前节点：" + context.getPresent() + " 到变更到：" + context.getExpect());
+        System.out.println("2.状态变更由："+context.getHandleName()+" 来完成");
+        System.out.println("3.状态从当前节点：" + context.getPresent() + " 到变更到：" + context.getExpect());
         System.out.println("------------------------------");
     }
 
