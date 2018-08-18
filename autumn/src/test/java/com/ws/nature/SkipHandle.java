@@ -3,21 +3,21 @@ package com.ws.nature;
 import com.ws.nature.core.Context;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * BaseHandle
+ * SkipHandle
  *
  * @author wanshou
- * @date 2018/8/15
+ * @date 2018/8/18
  */
-@Service("DefaultHandle")
-public class DefaultHandle implements Handle{
+@Service("SkipHandle")
+public class SkipHandle implements Handle{
 
     @Override
     public void handle(Context context) {
         System.out.println("执行"+context.getHandleName()+"需要处理的业务");
     }
+
 }

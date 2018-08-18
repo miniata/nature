@@ -2,10 +2,13 @@ package com.ws.nature.core;
 
 import com.alibaba.fastjson.JSONArray;
 import com.ws.nature.Handle;
+import com.ws.nature.plugin.HandleInterceptor;
+import com.ws.nature.plugin.HandleListener;
 import com.ws.nature.util.SpringHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -17,6 +20,10 @@ import java.util.stream.Collectors;
 public class FlowEngine<T extends Enum> {
 
     private static final List<Context> contexts = new ArrayList<>();
+
+    private static final List<HandleListener> listeners = new ArrayList<>();
+
+    private static final List<HandleInterceptor> interceptors = new ArrayList<>();
 
     FlowEngine() {
         init();
@@ -45,12 +52,32 @@ public class FlowEngine<T extends Enum> {
     }
 
     private void init(){
-        List<Context> contextList = JSONArray.parseArray(CommonConfig.flows, Context.class);
-        contextList.forEach(context -> {
-            Handle handle = SpringHelper.getBeanByName(context.getHandleName(), Handle.class);
-            Handle dsf = new DefaultFlow(handle);
-            context.setHandle(dsf);
+        //初始化流程节点上下文
+        List<Map> contextList = JSONArray.parseArray(CommonConfig.flows, Map.class);
+        //初始化上下文处理器
+        contextList.forEach(map -> {
+            String handleName = String.valueOf(map.get("handleName"));
+            String present = String.valueOf(map.get("present"));
+            String expect = String.valueOf(map.get("expect"));
+            Handle handle = SpringHelper.getBeanByName(handleName, Handle.class);
+            Handle defaultFlow = new DefaultFlow(handle);
+            Context context =  Context.newContextBuilder(present, expect)
+                    .handleName(handleName)
+                    .handle(defaultFlow)
+                    .build();
+            contexts.add(context);
         });
-        contexts.addAll(contextList);
+        //初始化监听器
+        List<String> handleListenerList = JSONArray.parseArray(CommonConfig.listeners, String.class);
+        handleListenerList.forEach(listenerName -> {
+            HandleListener handleListener = SpringHelper.getBeanByName(listenerName, HandleListener.class);
+            listeners.add(handleListener);
+        });
+        //初始化拦截器
+        interceptors.add(null);
+    }
+
+    static List<HandleListener> getListeners() {
+        return listeners;
     }
 }

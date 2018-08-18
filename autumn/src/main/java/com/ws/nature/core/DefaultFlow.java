@@ -2,8 +2,6 @@ package com.ws.nature.core;
 
 import com.ws.nature.Handle;
 
-import java.util.Map;
-
 /**
  * DefaultFlow为Handle操作类的默认装饰类
  *
@@ -17,9 +15,16 @@ public class DefaultFlow extends BaseFlow {
     }
 
     @Override
-    public Map<String, Object> handle(Context context) {
+    public void handle(Context context) {
         //执行拦截器和监听器
-        Map<String, Object> result = handle.handle(context);
-        return result;
+        handle.handle(context);
+        //执行监听器
+        toNotifyListeners(context);
     }
+
+    @Override
+    void toNotifyListeners(Context context) {
+        FlowEngine.getListeners().forEach(o -> o.update(context));
+    }
+
 }

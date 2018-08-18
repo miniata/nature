@@ -1,7 +1,9 @@
 package com.ws.nature.core;
 
+import com.ws.nature.DefaultHandle;
 import com.ws.nature.Handle;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,73 +24,73 @@ public class Context{
      */
     private String expect;
 
-    private Integer result = 0;
+    /**
+     * 执行器名字
+     */
+    private String handleName;
 
-    private String success = "状态流转到成功";
+    /**
+     * 执行器实例
+     */
+    private Handle handle;
 
-    private String fail = "状态流转失败";
+    private Map<String, Object> result = new HashMap<>();
 
-    private String handleName = "DefaultHandle";
-
-    private Handle handle = null;
+    public Context(Builder builder) {
+        this.present = builder.present;
+        this.expect = builder.expect;
+        this.handle = builder.handle;
+        this.handleName = builder.handleName;
+    }
 
     public String getPresent() {
         return present;
-    }
-
-    public void setPresent(String present) {
-        this.present = present;
     }
 
     public String getExpect() {
         return expect;
     }
 
-    public void setExpect(String expect) {
-        this.expect = expect;
-    }
-
-    public Integer getResult() {
-        return result;
-    }
-
-    public void setResult(Integer result) {
-        this.result = result;
-    }
-
-    public String getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(String success) {
-        this.success = success;
-    }
-
-    public String getFail() {
-        return fail;
-    }
-
-    public void setFail(String fail) {
-        this.fail = fail;
-    }
-
     public String getHandleName() {
         return handleName;
     }
 
-    public void setHandleName(String handleName) {
-        this.handleName = handleName;
+    public Map<String, Object> getResult() {
+        return result;
     }
 
-    public Handle getHandle() {
-        return handle;
+    public void toHandle(){
+        handle.handle(this);
     }
 
-    public void setHandle(Handle handle) {
-        this.handle = handle;
+    public static class Builder {
+
+        private String present;
+        private String expect;
+        private String handleName;
+        private Handle handle;
+
+        public Builder(String present, String expect) {
+            this.present = present;
+            this.expect = expect;
+        }
+
+        public Builder handleName(String handleName){
+            this.handleName = handleName;
+            return this;
+        }
+
+        public Builder handle(Handle handle){
+            this.handle = handle;
+            return this;
+        }
+
+        public Context build(){
+            return new Context(this);
+        }
     }
 
-    public Map<String, Object> toHandle(){
-        return getHandle().handle(this);
+    static Builder newContextBuilder(String present, String expect){
+       return new Builder(present, expect);
     }
 }

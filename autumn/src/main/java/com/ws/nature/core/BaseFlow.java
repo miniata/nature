@@ -1,6 +1,10 @@
 package com.ws.nature.core;
 
 import com.ws.nature.Handle;
+import com.ws.nature.plugin.HandleListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * BaseFlow为Handle包装类的转发类
@@ -10,10 +14,16 @@ import com.ws.nature.Handle;
  */
 public abstract class BaseFlow implements Handle {
 
-    protected Handle handle;
+    Handle handle;
 
-    public BaseFlow(Handle handle) {
+    BaseFlow(Handle handle) {
         this.handle = handle;
     }
+
+    /**
+     * 执行完handle通知监听
+     * @param context
+     */
+    abstract void toNotifyListeners(Context context);
 
 }

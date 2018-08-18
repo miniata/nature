@@ -1,5 +1,7 @@
 package com.ws.nature.plugin;
 
+import com.ws.nature.core.Context;
+
 /**
  * HandleListener
  *
@@ -9,8 +11,9 @@ package com.ws.nature.plugin;
 public interface HandleListener {
 
     /**
-     * 监听类更新方法
+     * 监听流程状态变更
+     * @param context
      */
-    void update();
+    void update(Context context);
 
 }

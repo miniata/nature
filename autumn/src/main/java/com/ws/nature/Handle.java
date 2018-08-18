@@ -17,6 +17,6 @@ public interface Handle {
      * @param context
      * @return
      */
-    Map<String, Object> handle(Context context);
+    void handle(Context context);
 
 }

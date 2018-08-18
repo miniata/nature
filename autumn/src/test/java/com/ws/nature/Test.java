@@ -19,8 +19,11 @@ public class Test extends BaseJunit4Test{
         //1.正常使用测试
         FlowEngine<State> flowEngine = CommonFactory.newFlowEngine(State.class);
         Context context = flowEngine.getContext(State.AAA, State.BBB);
-        Map<String, Object> result = context.toHandle();
-        System.out.println(result);
+        context.toHandle();
+        context = flowEngine.getContext(State.BBB, State.CCC);
+        context.toHandle();
+        context = flowEngine.getContext(State.CCC, State.DDD);
+        context.toHandle();
         //2.测试不存在的流程
         //Context context1 = flowEngine.getContext(State.BBB, State.AAA);
         //context1.toHandle();
