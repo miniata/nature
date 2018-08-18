@@ -10,7 +10,7 @@ import java.util.Map;
  * @author wanshou
  * @date 2018/8/16
  */
-public class Context {
+public class Context{
 
     /**
      * 当前节点状态

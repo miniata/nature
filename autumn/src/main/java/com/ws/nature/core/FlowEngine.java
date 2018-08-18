@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class FlowEngine<T extends Enum> {
 
-    private static final List<Context> states = new ArrayList<>();
+    private static final List<Context> contexts = new ArrayList<>();
 
     FlowEngine() {
         init();
@@ -32,25 +32,25 @@ public class FlowEngine<T extends Enum> {
         if(present == null || expect == null){
             throw new RuntimeException("参数 present："+present+"、expect："+expect+",一个都不能为空");
         }
-        List<Context> contexts = states.stream()
+        List<Context> contextList = contexts.stream()
                 .filter(o -> o.getPresent().equals(present.name()) && o.getExpect().equals(expect.name()))
                 .collect(Collectors.toList());
-        if(contexts == null || contexts.size() == 0){
+        if(contextList == null || contextList.size() == 0){
             throw new RuntimeException("不存在流程："+present+"---->"+expect);
         }
-        if(contexts.size() > 1){
+        if(contextList.size() > 1){
             throw new RuntimeException("流程配置："+present+"---->"+expect+",存在2个以上的handle");
         }
-        return contexts.get(0);
+        return contextList.get(0);
     }
 
     private void init(){
-        List<Context> contexts = JSONArray.parseArray(CommonConfig.flows, Context.class);
-        contexts.forEach(context -> {
+        List<Context> contextList = JSONArray.parseArray(CommonConfig.flows, Context.class);
+        contextList.forEach(context -> {
             Handle handle = SpringHelper.getBeanByName(context.getHandleName(), Handle.class);
             Handle dsf = new DefaultFlow(handle);
             context.setHandle(dsf);
         });
-        states.addAll(contexts);
+        contexts.addAll(contextList);
     }
 }

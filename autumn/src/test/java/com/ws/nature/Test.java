@@ -31,7 +31,7 @@ public class Test extends BaseJunit4Test{
         //FlowEngine<CommonConfig> flowEngine = CommonFactory.newFlowEngine(CommonConfig.class);
         //5.测试混入其他枚举类型
         //FlowEngine<State> flowEngine1 = CommonFactory.newFlowEngine(State.class);
-        //flowEngine1.getContext(OrderState, OrderState);
+        //flowEngine1.getContext(OrderState.AAA, OrderState.BBB);
         //6.测试跳过工厂方法创建流程引擎,看是否可以成功
         //FlowEngine flowEngine1 = new FlowEngine<>();
     }
