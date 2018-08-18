@@ -1,6 +1,5 @@
 package com.ws.nature.core;
 
-import com.ws.nature.DefaultHandle;
 import com.ws.nature.Handle;
 
 import java.util.HashMap;

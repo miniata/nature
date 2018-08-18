@@ -1,7 +1,5 @@
 package com.ws.nature.core;
 
-import com.ws.nature.core.FlowEngine;
-
 import java.util.HashMap;
 import java.util.Map;
 
