@@ -2,6 +2,7 @@ package com.ws.nature.core;
 
 import com.ws.nature.Handle;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class Context{
      */
     private Handle handle;
 
-    private final Map<Thread, Map<String, Object>> result = new HashMap<>();
+    private final Map<Thread, Map<String, Object>> resultMap = new HashMap<>();
 
     public Context(Builder builder) {
         this.present = builder.present;
@@ -55,20 +56,23 @@ public class Context{
     }
 
     public Map<String, Object> getResult() {
-        Map<String, Object> map = result.get(Thread.currentThread());
-        if(map == null){
-            map = new HashMap<>();
-            result.put(Thread.currentThread(), map);
+        Map<String, Object> result = resultMap.get(Thread.currentThread());
+        if(result == null){
+            result = new HashMap<>();
+            resultMap.put(Thread.currentThread(), result);
         }
-        return map;
+        return result;
     }
 
-    public void clearResult(){
-        result.remove(Thread.currentThread());
-    }
-
-    public void toHandle(){
+    public Map<String, Object> toHandle(){
         handle.handle(this);
+        Map<String, Object> result = resultMap.get(Thread.currentThread());
+        if(result != null){
+            resultMap.remove(Thread.currentThread());
+        }else{
+            result = Collections.emptyMap();
+        }
+        return result;
     }
 
     public static class Builder {
