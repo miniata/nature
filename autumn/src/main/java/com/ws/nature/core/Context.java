@@ -33,7 +33,7 @@ public class Context{
      */
     private Handle handle;
 
-    private Map<String, Object> result = new HashMap<>();
+    private final Map<Thread, Map<String, Object>> result = new HashMap<>();
 
     public Context(Builder builder) {
         this.present = builder.present;
@@ -55,7 +55,16 @@ public class Context{
     }
 
     public Map<String, Object> getResult() {
-        return result;
+        Map<String, Object> map = result.get(Thread.currentThread());
+        if(map == null){
+            map = new HashMap<>();
+            result.put(Thread.currentThread(), map);
+        }
+        return map;
+    }
+
+    public void clearResult(){
+        result.remove(Thread.currentThread());
     }
 
     public void toHandle(){
