@@ -11,6 +11,7 @@
     <modules>
         <module>snow</module>
         <module>autumn</module>
+        <module>wind</module>
     </modules>
 
 
